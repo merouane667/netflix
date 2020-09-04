@@ -21,7 +21,7 @@ export const DataCenter = (props) => {
 
     return (
       <div>
-        <Context.Provider value={{ getName }}>
+        <Context.Provider value={{ getName, trailerUrl }}>
           {props.children}
         </Context.Provider>
       </div>

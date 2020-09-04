@@ -1,14 +1,15 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import axios from './axios';
 import './row.css'
-import YouTube from 'react-youtube';
 import movieTrailer from 'movie-trailer';
 import {Link} from 'react-scroll';
+import { Context } from "./DataCenter";
 
 const base_url = "https://image.tmdb.org/t/p/original/"
 const Row = ({ title, fetchUrl, isLargeRow}) => {
     const [movies, setMovies] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
+    const { getName } = useContext(Context);
     useEffect(()=>{
         async function fetchData(){
             const request = await axios.get(fetchUrl);
@@ -17,13 +18,6 @@ const Row = ({ title, fetchUrl, isLargeRow}) => {
         }
         fetchData();
     },[fetchUrl])
-    const opts = {
-        height:"390",
-        width:"100%",
-        playerVars:{
-            autoplay:1,
-        }
-    };
 
     const handleClick = (movie)=>{
         if (trailerUrl) {
@@ -40,13 +34,20 @@ const Row = ({ title, fetchUrl, isLargeRow}) => {
     }
 
     return (
-      <div className="row">
+      <div className="row" id="row">
         <h2>{title}</h2>
         <div className="row_posters">
           {movies.map(
             (movie) =>
               movie.backdrop_path && (
-                <a>
+                <Link
+                  onClick={() =>
+                    getName(movie?.title || movie?.name || movie?.origina_name)
+                  }
+                  to={isLargeRow ? "" : "row"}
+                  smooth={true}
+                  duration={1000}
+                >
                   <img
                     onClick={() => handleClick(movie)}
                     key={movie.id}
@@ -56,13 +57,10 @@ const Row = ({ title, fetchUrl, isLargeRow}) => {
                     }`}
                     alt={movie.name}
                   ></img>
-                </a>
+                </Link>
               )
           )}
         </div>
-        {/* {isLargeRow && trailerUrl && (
-          <YouTube videoId={trailerUrl} opts={opts} id="youtube" />
-        )} */}
       </div>
     );
 }

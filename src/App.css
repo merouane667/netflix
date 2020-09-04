@@ -4,3 +4,6 @@
 .app {
   background-color: #111;
 }
+body{
+  overflow-x:hidden;
+}
