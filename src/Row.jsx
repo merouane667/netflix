@@ -32,6 +32,8 @@ const Row = ({ title, fetchUrl, isLargeRow}) => {
             }).catch((error) =>console.log(error))
         }
     }
+  if (!movies)
+    return ''
 
     return (
       <div className="row" id="row">

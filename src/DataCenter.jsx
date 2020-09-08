@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 
@@ -13,11 +13,11 @@ export const DataCenter = (props) => {
           .then((url) => {
             const urlParams = new URLSearchParams(new URL(url).search);
             setTrailerUrl(urlParams.get("v"));
-            console.log(urlParams.get("v"));
           })
           .catch((error) => console.log(error));
       }
     };
+
 
     return (
       <div>

@@ -12,8 +12,16 @@
     transition: all 0.5s;
 
 }
+.nav_avatar{
+    cursor: pointer;
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
+}
 .nav_black{
     background-color: #111;
+}
+.nav_avatar_black{
+    background:#E50914;
 }
 .nav_logo {
     position: fixed;

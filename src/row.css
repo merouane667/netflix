@@ -9,6 +9,7 @@
 }
 .row_poster{
     object-fit: contain;
+    width: 150px;
     max-height: 100px;
     margin-right: 10px;
     transition: transform 450ms;
